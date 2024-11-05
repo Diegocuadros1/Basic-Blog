@@ -16,12 +16,12 @@ export default function ArticleEntry({ addArticle }) {
   }
 
   return (
-    <div>
+    <div className="article-form">
       <form onSubmit={submit}>
         {error && <p className="error">{error}</p>}
-        Title
+        <h1>Title of your post!</h1>
         <input value={title} onChange={(e) => setTitle(e.target.value)} />
-        Body
+        <h2>Write your text here!</h2>
         <textarea
           rows="8"
           value={body}

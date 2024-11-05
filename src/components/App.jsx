@@ -5,6 +5,8 @@ import ArticleEntry from "./ArticleEntry"
 import { SignIn, SignOut } from "./Auth"
 import { useAuthentication } from "../services/authService"
 import { fetchArticles, createArticle } from "../services/articleService"
+import { GiHamburgerMenu } from "react-icons/gi";
+
 import "./App.css"
 
 export default function App() {
@@ -23,6 +25,8 @@ export default function App() {
     }
   }, [user])
 
+  
+
   // Update the "database" *then* update the internal React state. These
   // two steps are definitely necessary.
   function addArticle({ title, body }) {
@@ -33,13 +37,42 @@ export default function App() {
     })
   }
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Define your breakpoint
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Update state based on window width
+    };
+
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="App">
       <header>
-        Blog
-        {user && <button onClick={() => setWriting(true)}>New Article</button>}
+        <h1>Diego's Blog</h1>
+        {user && <button className="new-article" onClick={() => setWriting(true)}>New Article</button>}
         {!user ? <SignIn /> : <SignOut />}
       </header>
+
+
+
+      {!user ? (
+        <section className="landing">
+          <div className="welcome">
+            <h1> Welcome to Diego's Blog! </h1>
+            <h2> Sign In to get started! </h2>
+            <SignIn />
+          </div>
+          
+        </section>
+        ) : ""}
+
 
       {!user ? "" : <Nav articles={articles} setArticle={setArticle} />}
 

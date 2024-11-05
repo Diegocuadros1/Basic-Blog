@@ -6,7 +6,7 @@ export function SignIn() {
 
 export function SignOut() {
   return (
-    <div>
+    <div className="info">
       Hello, {loggedInUserDisplayName()}  
       <button onClick={logout}>Sign Out</button>
     </div>

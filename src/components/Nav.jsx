@@ -1,6 +1,9 @@
+import { FaArrowAltCircleRight } from "react-icons/fa";
+
+
 export default function Nav({ articles, setArticle }) {
   return (
-    <nav>
+    <nav className="navigation">
       {!articles
         ? "No articles"
         : articles.map((a) => (
